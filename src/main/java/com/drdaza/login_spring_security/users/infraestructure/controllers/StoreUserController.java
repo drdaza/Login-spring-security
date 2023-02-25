@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.drdaza.login_spring_security.users.application.StoreUserService;
-import com.drdaza.login_spring_security.users.domain.User;
+import com.drdaza.login_spring_security.users.application.services.StoreUserService;
+import com.drdaza.login_spring_security.users.domain.models.User;
 import com.drdaza.login_spring_security.users.domain.payloads.UserPayLoad;
 
 @RestController

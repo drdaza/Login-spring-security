@@ -1,4 +1,4 @@
-package com.drdaza.login_spring_security.users.domain;
+package com.drdaza.login_spring_security.users.domain.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
