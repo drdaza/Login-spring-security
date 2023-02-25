@@ -15,6 +15,7 @@ public class StoreUserService {
 
     private UserRepository repository;
 
+
     public StoreUserService(UserRepository repository) {
         this.repository = repository;
     }

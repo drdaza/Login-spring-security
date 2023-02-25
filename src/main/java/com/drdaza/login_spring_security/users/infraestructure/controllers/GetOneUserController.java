@@ -1,28 +1,25 @@
 package com.drdaza.login_spring_security.users.infraestructure.controllers;
 
-
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.drdaza.login_spring_security.users.application.services.ListAllUsersService;
+import com.drdaza.login_spring_security.users.application.services.GetOneUserService;
 import com.drdaza.login_spring_security.users.domain.models.User;
-
 
 @RestController
 @RequestMapping(path = "/api/users")
-public class ListAllUsersController {
-    private ListAllUsersService service;
+public class GetOneUserController {
+    
+    private GetOneUserService service;
 
-    public ListAllUsersController(ListAllUsersService service) {
+    public GetOneUserController(GetOneUserService service) {
         this.service = service;
     }
 
-    
-    @GetMapping(path = "/all")
-    public List<User> listAllUsers() {
-        return service.ListAllUsers();
+    @GetMapping(path = "/{id}")
+    public User getOneUser(@PathVariable Long id){
+        return service.getOneUser(id);
     }
 }
