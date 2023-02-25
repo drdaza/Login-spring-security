@@ -1,0 +1,1 @@
+INSERT INTO users VALUES(default,  '{bcrypt}$2a$10$7G1UoSVGRbir2NPdA2yEkuIJqvzIH9FR1cNzcCtmtZ5nxjh63dCIG', 'ROLE_ADMIN,ROLE_USER','admin')
