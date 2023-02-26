@@ -2,6 +2,7 @@ package com.drdaza.login_spring_security.prodcuts.infraestructure.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ public class ListAllController {
         this.service = service;
     }
 
+    @GetMapping(path = "")
     public List<Product> listAll() {
         return service.listAll();
     }
