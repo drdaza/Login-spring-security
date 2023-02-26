@@ -1,10 +1,10 @@
-// Utilities
 import ApiCall from '@/apiCall/ApiCall'
 import { defineStore } from 'pinia'
 
-export const useAppStore = defineStore('app', {
-  state: () => ({
-    test: ''
+export const usersStore = defineStore({
+  id: 'users',
+  state: ()=>({
+    elements: ''
   }),
   actions:{
     async login(username, password){
@@ -12,7 +12,7 @@ export const useAppStore = defineStore('app', {
       const api = myApiCall.chooseApi();
 
       await api.login(username, password);
-
     } 
   }
+
 })
