@@ -10,6 +10,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 import com.drdaza.login_spring_security.users.application.userDetailsServices.JpaUserDetailsService;
 
 @Configuration
@@ -34,6 +35,7 @@ public class SecurityConfiguration {
             .authorizeRequests(auth -> auth
                                        .antMatchers("/api/users").permitAll()
                                        .antMatchers("/api/users/**").hasRole("ADMIN")
+                                       .antMatchers("/api/products").hasAnyRole("USER","ADMIN")
                                        .anyRequest()
                                        .authenticated())
             .userDetailsService(service)
