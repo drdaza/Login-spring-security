@@ -28,11 +28,15 @@ public class SecurityConfiguration {
         http.cors()
             .and()
             .csrf(csrf -> csrf.disable())
-            .formLogin(form -> form.disable())
+            .formLogin(form -> form
+                                .loginPage("/login")
+                                .permitAll()
+                                .disable())
             .logout(out -> out
                            .logoutUrl("/api/logout")
                            .deleteCookies("JSESSIONID"))
             .authorizeRequests(auth -> auth
+                                       .antMatchers("/login").permitAll()
                                        .antMatchers("/api/users").permitAll()
                                        .antMatchers("/api/users/**").hasRole("ADMIN")
                                        .antMatchers("/api/products").hasAnyRole("USER","ADMIN")

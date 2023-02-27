@@ -2,16 +2,23 @@
 import { reactive } from 'vue';
 import { useAppStore } from '@/store/app';
 import UserPayLoad from '@/apiCall/payloads/UserPayLoad';
+import { useRouter } from 'vue-router';
 
 const test = useAppStore();
 const data = reactive(new UserPayLoad('', ''));
+const router = useRouter();
 
 
-const submit = () => {
-    console.log(data.username);
-    console.log(data.password);
-    test.login(data.username, data.password);
+const submit = async () => {
+
+    const reponse = await test.login(data.username, data.password);
+
+    console.log(reponse);
+    if(reponse == 201){
+        router.push({name: "pass"});
+    }
 }
+
 
 </script>
 
