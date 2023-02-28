@@ -1,10 +1,12 @@
 package com.drdaza.login_spring_security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 /* import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; */
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +18,9 @@ import com.drdaza.login_spring_security.users.application.userDetailsServices.Jp
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    @Autowired
+    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
     
     private JpaUserDetailsService service;
 
@@ -27,25 +32,25 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.cors()
             .and()
+            .headers(header -> header.frameOptions().sameOrigin())
             .csrf(csrf -> csrf.disable())
             .formLogin(form -> form
-                                .loginPage("/login")
-                                .permitAll()
                                 .disable())
             .logout(out -> out
                            .logoutUrl("/api/logout")
                            .deleteCookies("JSESSIONID"))
             .authorizeRequests(auth -> auth
-                                       .antMatchers("/login").permitAll()
+                                       .antMatchers("/api/login").permitAll()
                                        .antMatchers("/api/users").permitAll()
                                        .antMatchers("/api/users/**").hasRole("ADMIN")
                                        .antMatchers("/api/products").hasAnyRole("USER","ADMIN")
                                        .anyRequest()
                                        .authenticated())
             .userDetailsService(service)
-            .headers(header -> header.frameOptions().disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+            .httpBasic(basic -> basic.authenticationEntryPoint(authenticationEntryPoint))
             .httpBasic(Customizer.withDefaults());
-
+            
         return http.build(); 
     }
     @Bean

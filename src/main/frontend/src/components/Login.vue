@@ -14,7 +14,7 @@ const submit = async () => {
     const reponse = await test.login(data.username, data.password);
 
     console.log(reponse);
-    if(reponse == 201){
+    if(reponse == 202){
         router.push({name: "pass"});
     }
 }

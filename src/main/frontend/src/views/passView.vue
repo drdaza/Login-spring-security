@@ -2,7 +2,12 @@
 import axios from 'axios';
 
 const functionTest = async () =>{
-    const responser = await axios.get('http://localhost:8080/api/products');
+    const responser = await axios.get('http://localhost:8080/api/products', {
+        auth:{
+            username: 'user',
+            password: 'password'
+        }
+    });
 
     console.log(responser);
 }
