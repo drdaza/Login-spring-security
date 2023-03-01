@@ -13,8 +13,8 @@ const submit = async () => {
 
     const reponse = await test.login(data.username, data.password);
 
-    console.log(reponse);
-    if(reponse == 202){
+    console.log(reponse.data);
+    if(reponse.status == 202){
         router.push({name: "pass"});
     }
 }

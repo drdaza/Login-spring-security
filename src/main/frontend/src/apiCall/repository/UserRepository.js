@@ -15,9 +15,9 @@ export default class UserRepository{
                                     }}
                                     );
 
-          const status = (await reponse).status;
+          const status = (await reponse);
           
-          console.log((await reponse).data);
+          
           return status;
     }
     encode(username, password){

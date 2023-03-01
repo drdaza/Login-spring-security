@@ -14,7 +14,7 @@ export const useAppStore = defineStore('app', {
 
       const response = await api.login(username, password);
 
-      console.log(response);
+      
 
       this.test = response;
 
